@@ -175,7 +175,7 @@
 #endif
 
 #include "cmsis_compiler.h"               /* CMSIS compiler specific defines */
-#include "armv8r_cp15.h.h"
+#include "armv8r_cp15.h"
 
 #ifdef __cplusplus
 }
@@ -339,6 +339,110 @@ typedef union
 #define CPSR_M_UND                       0x1BU                                  /*!< \brief CPSR: M Undefined mode (PL1) */
 #define CPSR_M_SYS                       0x1FU                                  /*!< \brief CPSR: M System mode (PL1) */
 
+/* CP15 Register SCTLR */
+typedef union
+{
+  struct
+  {
+    uint32_t M:1;                        /*!< \brief bit:     0  MMU enable */
+    uint32_t A:1;                        /*!< \brief bit:     1  Alignment check enable */
+    uint32_t C:1;                        /*!< \brief bit:     2  Cache enable */
+    RESERVED(0:2, uint32_t)              
+    uint32_t CP15BEN:1;                  /*!< \brief bit:     5  CP15 barrier enable */
+    RESERVED(1:1, uint32_t)              
+    uint32_t B:1;                        /*!< \brief bit:     7  Endianness model */
+    RESERVED(2:2, uint32_t)              
+    uint32_t SW:1;                       /*!< \brief bit:    10  SWP and SWPB enable */
+    uint32_t Z:1;                        /*!< \brief bit:    11  Branch prediction enable */
+    uint32_t I:1;                        /*!< \brief bit:    12  Instruction cache enable */
+    uint32_t V:1;                        /*!< \brief bit:    13  Vectors bit */
+    uint32_t RR:1;                       /*!< \brief bit:    14  Round Robin select */
+    RESERVED(3:2, uint32_t)              
+    uint32_t HA:1;                       /*!< \brief bit:    17  Hardware Access flag enable */
+    RESERVED(4:1, uint32_t)              
+    uint32_t WXN:1;                      /*!< \brief bit:    19  Write permission implies XN */
+    uint32_t UWXN:1;                     /*!< \brief bit:    20  Unprivileged write permission implies PL1 XN */
+    uint32_t FI:1;                       /*!< \brief bit:    21  Fast interrupts configuration enable */
+    uint32_t U:1;                        /*!< \brief bit:    22  Alignment model */
+    RESERVED(5:1, uint32_t)              
+    uint32_t VE:1;                       /*!< \brief bit:    24  Interrupt Vectors Enable */
+    uint32_t EE:1;                       /*!< \brief bit:    25  Exception Endianness */
+    RESERVED(6:1, uint32_t)              
+    uint32_t NMFI:1;                     /*!< \brief bit:    27  Non-maskable FIQ (NMFI) support */
+    uint32_t TRE:1;                      /*!< \brief bit:    28  TEX remap enable. */
+    uint32_t AFE:1;                      /*!< \brief bit:    29  Access flag enable */
+    uint32_t TE:1;                       /*!< \brief bit:    30  Thumb Exception enable */
+    RESERVED(7:1, uint32_t)              
+  } b;                                   /*!< \brief Structure used for bit  access */
+  uint32_t w;                            /*!< \brief Type      used for word access */
+} SCTLR_Type;
+
+#define SCTLR_TE_Pos                     30U                                    /*!< \brief SCTLR: TE Position */
+#define SCTLR_TE_Msk                     (1UL << SCTLR_TE_Pos)                  /*!< \brief SCTLR: TE Mask */
+
+#define SCTLR_AFE_Pos                    29U                                    /*!< \brief SCTLR: AFE Position */
+#define SCTLR_AFE_Msk                    (1UL << SCTLR_AFE_Pos)                 /*!< \brief SCTLR: AFE Mask */
+
+#define SCTLR_TRE_Pos                    28U                                    /*!< \brief SCTLR: TRE Position */
+#define SCTLR_TRE_Msk                    (1UL << SCTLR_TRE_Pos)                 /*!< \brief SCTLR: TRE Mask */
+
+#define SCTLR_NMFI_Pos                   27U                                    /*!< \brief SCTLR: NMFI Position */
+#define SCTLR_NMFI_Msk                   (1UL << SCTLR_NMFI_Pos)                /*!< \brief SCTLR: NMFI Mask */
+
+#define SCTLR_EE_Pos                     25U                                    /*!< \brief SCTLR: EE Position */
+#define SCTLR_EE_Msk                     (1UL << SCTLR_EE_Pos)                  /*!< \brief SCTLR: EE Mask */
+
+#define SCTLR_VE_Pos                     24U                                    /*!< \brief SCTLR: VE Position */
+#define SCTLR_VE_Msk                     (1UL << SCTLR_VE_Pos)                  /*!< \brief SCTLR: VE Mask */
+
+#define SCTLR_U_Pos                      22U                                    /*!< \brief SCTLR: U Position */
+#define SCTLR_U_Msk                      (1UL << SCTLR_U_Pos)                   /*!< \brief SCTLR: U Mask */
+
+#define SCTLR_FI_Pos                     21U                                    /*!< \brief SCTLR: FI Position */
+#define SCTLR_FI_Msk                     (1UL << SCTLR_FI_Pos)                  /*!< \brief SCTLR: FI Mask */
+
+#define SCTLR_UWXN_Pos                   20U                                    /*!< \brief SCTLR: UWXN Position */
+#define SCTLR_UWXN_Msk                   (1UL << SCTLR_UWXN_Pos)                /*!< \brief SCTLR: UWXN Mask */
+
+#define SCTLR_WXN_Pos                    19U                                    /*!< \brief SCTLR: WXN Position */
+#define SCTLR_WXN_Msk                    (1UL << SCTLR_WXN_Pos)                 /*!< \brief SCTLR: WXN Mask */
+
+#define SCTLR_HA_Pos                     17U                                    /*!< \brief SCTLR: HA Position */
+#define SCTLR_HA_Msk                     (1UL << SCTLR_HA_Pos)                  /*!< \brief SCTLR: HA Mask */
+
+#define SCTLR_RR_Pos                     14U                                    /*!< \brief SCTLR: RR Position */
+#define SCTLR_RR_Msk                     (1UL << SCTLR_RR_Pos)                  /*!< \brief SCTLR: RR Mask */
+
+#define SCTLR_V_Pos                      13U                                    /*!< \brief SCTLR: V Position */
+#define SCTLR_V_Msk                      (1UL << SCTLR_V_Pos)                   /*!< \brief SCTLR: V Mask */
+
+#define SCTLR_I_Pos                      12U                                    /*!< \brief SCTLR: I Position */
+#define SCTLR_I_Msk                      (1UL << SCTLR_I_Pos)                   /*!< \brief SCTLR: I Mask */
+
+#define SCTLR_Z_Pos                      11U                                    /*!< \brief SCTLR: Z Position */
+#define SCTLR_Z_Msk                      (1UL << SCTLR_Z_Pos)                   /*!< \brief SCTLR: Z Mask */
+
+#define SCTLR_SW_Pos                     10U                                    /*!< \brief SCTLR: SW Position */
+#define SCTLR_SW_Msk                     (1UL << SCTLR_SW_Pos)                  /*!< \brief SCTLR: SW Mask */
+
+#define SCTLR_B_Pos                      7U                                     /*!< \brief SCTLR: B Position */
+#define SCTLR_B_Msk                      (1UL << SCTLR_B_Pos)                   /*!< \brief SCTLR: B Mask */
+
+#define SCTLR_CP15BEN_Pos                5U                                     /*!< \brief SCTLR: CP15BEN Position */
+#define SCTLR_CP15BEN_Msk                (1UL << SCTLR_CP15BEN_Pos)             /*!< \brief SCTLR: CP15BEN Mask */
+
+#define SCTLR_C_Pos                      2U                                     /*!< \brief SCTLR: C Position */
+#define SCTLR_C_Msk                      (1UL << SCTLR_C_Pos)                   /*!< \brief SCTLR: C Mask */
+
+#define SCTLR_A_Pos                      1U                                     /*!< \brief SCTLR: A Position */
+#define SCTLR_A_Msk                      (1UL << SCTLR_A_Pos)                   /*!< \brief SCTLR: A Mask */
+
+#define SCTLR_M_Pos                      0U                                     /*!< \brief SCTLR: M Position */
+#define SCTLR_M_Msk                      (1UL << SCTLR_M_Pos)                   /*!< \brief SCTLR: M Mask */
+
+#if (__GIC_PRESENT == 1U) || defined(DOXYGEN)
+  #include "gicv3.h"
+#endif /*  (__GIC_PRESENT == 1U) || defined(DOXYGEN) */
 
 #ifdef __cplusplus
 }
