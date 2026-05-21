@@ -22,6 +22,10 @@
 
 #define __CORTEX_R           52U    /*!< \brief Cortex-R52 Core */
 
+#ifdef __FPU_PRESENT
+  #define __FPU_D32     1U
+#endif
+
 #if defined __CHECK_DEVICE_DEFINES
   #ifndef __CR52_REV
     #define __CR52_REV              0x0000U
